@@ -135,3 +135,5 @@ checkOS \
 && checkMujoco \
 && checkPackage \
 && rm -f $HOME/getid*
+echo  'export LD_LIBRARY_PATH=~/.mujoco/mujoco200/bin/' >> ~/.bashrc
+source ~/.bashrc
