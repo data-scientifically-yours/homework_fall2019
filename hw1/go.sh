@@ -49,9 +49,11 @@ checkOS() {
   if [[ "$(uname)" == "Darwin" ]]; then
     MUJOCO_BIN="https://www.roboti.us/download/${MUJOCO_VER}_macos.zip"
     GET_ID=https://www.roboti.us/getid/getid_osx
+    
   elif [[ "$(uname)" == "Linux" ]]; then
     MUJOCO_BIN="https://www.roboti.us/download/${MUJOCO_VER}_linux.zip"
     GET_ID=https://www.roboti.us/getid/getid_linux
+    sudo apt install unzip
   else
     err 'Detected neither OSX or Linux Operating System'
   fi
