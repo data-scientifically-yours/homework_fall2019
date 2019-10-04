@@ -1,11 +1,8 @@
 
 1) & 2)
-install package mujoco by running:
+install package & mujoco by running:
 
-$ bash go.sh
-
-add the following to bottom of your bashrc:
-export LD_LIBRARY_PATH=~/.mujoco/mjpro150/bin/
+$ wget https://raw.githubusercontent.com/data-scientifically-yours/homework_fall2019/master/hw1/go.sh && bash go.sh
 
 ##############################################
 ##############################################
