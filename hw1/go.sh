@@ -19,9 +19,9 @@ err() {
 wgetunzip() {
   TMPFILE=$(mktemp)
   PWD=$(pwd)
-  wget "$1" -O $TMPFILE
-  unzip -d $PWD $TMPFILE
-  rm $TMPFILE
+  wget "$1" -O "$TMPFILE"
+  unzip -d "$PWD" "$TMPFILE"
+  rm "$TMPFILE"
 }
 
 #-------------------------------------------------------------------------------
@@ -29,10 +29,10 @@ wgetunzip() {
 #-------------------------------------------------------------------------------
 yesno() {
   while true; do
-    read -p "Would you ?" yn
+    read -r -p "Would you ?" yn
     case $yn in
       [Yy]*)
-        eval ${1}
+        eval "${1}"
         break
         ;;
       [Nn]*) exit ;;
@@ -49,11 +49,9 @@ checkOS() {
   if [[ "$(uname)" == "Darwin" ]]; then
     MUJOCO_BIN="https://www.roboti.us/download/${MUJOCO_VER}_macos.zip"
     GET_ID=https://www.roboti.us/getid/getid_osx
-    
   elif [[ "$(uname)" == "Linux" ]]; then
     MUJOCO_BIN="https://www.roboti.us/download/${MUJOCO_VER}_linux.zip"
     GET_ID=https://www.roboti.us/getid/getid_linux
-    sudo apt install unzip
   else
     err 'Detected neither OSX or Linux Operating System'
   fi
@@ -76,7 +74,7 @@ checkMujoco() {
 }
 
 setupMujoco() {
-  if [ -d "${MUJOCO_DIR}" ]; then rm -rf ${MUJOCO_DIR}; fi
+  if [ -d "${MUJOCO_DIR}" ]; then rm -rf "${MUJOCO_DIR}"; fi
   mkdir -p "${MUJOCO_DIR}"
   keyMujoco
   wgetunzip $MUJOCO_BIN && mv $MUJOCO_VER* "${MUJOCO_DIR}"/$MUJOCO_VER
@@ -88,7 +86,7 @@ setupMujoco() {
 keyMujoco() {
   FILE=$(find . -name 'mjkey.txt' -print -quit)
   if [ -n "$FILE" ]; then
-    cp "$FILE" $MUJOCO_DIR
+    cp "$FILE" "$MUJOCO_DIR"
     echo "====================================================================="
     echo "                    mjkey.txt copied successfully                    "
     echo "====================================================================="
@@ -99,8 +97,10 @@ keyMujoco() {
     echo "                 https://www.roboti.us/license.html                  "
     echo " save it anywhere in your home directory and re-launch the script    "
     echo "====================================================================="
-    if [ ! -f getid* ]; then wget $GET_ID; fi
-    chmod +x getid* && ./getid*
+    for f in getid*; do
+      if [ ! -f "$f" ]; then wget $GET_ID; fi
+      chmod +x "$f" && ./"$f"
+    done
     exit 1
   fi
 }
@@ -115,15 +115,15 @@ checkPackage() {
   if [ ! -d "${TARGET}" ]; then
     setupPackage
   else
-    echo '$REPO already cloned !!  '
+    echo "$REPO already cloned !!"
     echo 'Would you like to remove it and clone a new one ?!'
-    rm -rf ${TARGET} && yesno setupPackage
+    rm -rf "${TARGET}" && yesno setupPackage
   fi
 }
 
 setupPackage() {
   mkdir -p "${TARGET}"
-  git clone $SOURCE $TARGET && cd $TARGET/hw1 && python setup.py develop
+  git clone $SOURCE "$TARGET" && cd "$TARGET"/hw1 && python setup.py develop
   echo "======================================================================="
   echo "                   $REPO successfully cloned                           "
   echo "======================================================================="
@@ -134,8 +134,6 @@ setupPackage() {
 # Launch
 #-------------------------------------------------------------------------------
 checkOS \
-&& checkMujoco \
-&& checkPackage \
-&& rm -f $HOME/getid*
-echo  'export LD_LIBRARY_PATH=~/.mujoco/mujoco200/bin/' >> ~/.bashrc
-source ~/.bashrc
+  && checkMujoco \
+  && checkPackage \
+  && rm -f "$HOME"/getid*
