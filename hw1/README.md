@@ -1,16 +1,10 @@
 
-1) & 2)
-install package & mujoco by running:
-
+### 1 & 2) install package & mujoco by running:
 ```bash
-wget 'https://git.io/Jecbh' && bash go.sh
+  wget 'https://git.io/Jecbh' && bash go.sh
 ```
-##############################################
-##############################################
 
-3)install other dependencies
-
--------------------
+### 3)install other dependencies
 
 a) [PREFERRED] Option A:
 
@@ -44,10 +38,7 @@ b) Option B:
 install dependencies locally, by running:
 $ pip install -r requirements.txt
 
-##############################################
-##############################################
-
-4) code:
+### 4) code:
 
 Blanks to be filled in are marked with "TODO"
 The following files have blanks in them:
@@ -61,10 +52,7 @@ The following files have blanks in them:
 
 See the code + the hw pdf for more details.
 
-##############################################
-##############################################
-
-5) run code: 
+### 5) run code: 
 
 Run the following command for Section 1 (Behavior Cloning):
 
@@ -75,9 +63,7 @@ Run the following command for Section 2 (DAGGER):
 
 $ python cs285/scripts/run_hw1_behavior_cloning.py --expert_policy_file cs285/policies/experts/Ant.pkl --env_name Ant-v2 --exp_name test_dagger_ant --n_iter 10 --do_dagger --expert_data cs285/expert_data/expert_data_Ant-v2.pkl
 
-##############################################
-
-6) visualize saved tensorboard event file:
+### 6) visualize saved tensorboard event file:
 
 $ cd cs285/data/<your_log_dir>
 $ tensorboard --logdir .
