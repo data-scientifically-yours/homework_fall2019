@@ -1,7 +1,7 @@
 
 ### 1 & 2) install package & mujoco by running:
 ```bash
-  wget 'https://git.io/Jecbh' && bash go.sh
+  wget 'https://raw.githubusercontent.com/data-scientifically-yours/homework_fall2019/master/hw1/go.sh' && bash go.sh
 ```
 
 ### 3)install other dependencies
